@@ -1,5 +1,5 @@
 <?php
- 
+
  /**
  * This class is merely used to publish assets that are needed by all dhtmlx
  * widgets and thus have to be imported before any widget gets rendered.
@@ -21,7 +21,7 @@ use yii\helpers\Html;
  *
  * ```php
  * echo Tile::widget(array(
- *     'items' => 
+ *     'items' =>
  *         // equivalent to the above
  *         array(
  *             'content' => 'Anim pariatur cliche...',
@@ -60,6 +60,7 @@ class Tile extends Widget
 	 * ```
 	 */
 	public $items = array();
+	public $url;
 
 
 	/**
@@ -76,9 +77,11 @@ class Tile extends Widget
 	 */
 	public function run()
 	{
-		echo Html::beginTag('div', $this->options) . "\n";
-		echo $this->renderItems() . "\n";
-		echo Html::endTag('div') . "\n";
+     echo  Html::a(
+		 Html::beginTag('div', $this->options) . "\n".
+		 $this->renderItems() . "\n".
+		 Html::endTag('div') . "\n"
+		 ,$this->url);
 		$this->registerPlugin('tile');
 	}
 
@@ -111,15 +114,18 @@ class Tile extends Widget
 			$id = $this->options['id'] . '-tile' . $index;
 			$options = ArrayHelper::getValue($item, 'contentOptions', array());
 			$options['id'] = $id;
-			$this->addCssClass($options, 'tile-content');			
+			$this->addCssClass($options, 'tile-content');
+
 			$content = Html::tag('div', $item['content'], $options) . "\n";
+
 		} else {
 			throw new InvalidConfigException('The "content" option is required.');
 		}
 		if (isset($item['brand'])) {
 			$brandid = $this->options['id'] . '-tile-brand' . $index;
 			$brand = Html::tag('div', $item['brand'], array('class'=>'brand','id'=>$brandid)) . "\n";
-		} 
+
+		}
 		$group = array();
 		$group[] = $content;
 		$group[] = $brand;
