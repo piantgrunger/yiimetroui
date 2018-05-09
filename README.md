@@ -50,7 +50,7 @@ Package is although registered at packagist.org - so you can just add one line o
 "require": {
         "yiisoft/yii2": "dev-master",
         "yiisoft/yii2-composer":"dev-master",
-        "philippfrenzel/yiimetroui":"*"
+        "piantgrunger/yiimetroui":"*"
 },
 ```
 
@@ -162,5 +162,6 @@ echo Tile::widget(array(
         ),
     ),
     'options'=>array('class'=>'icon bg-color-green'),
+    'url'=>['index']
 ));
 ```
